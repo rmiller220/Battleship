@@ -1,6 +1,5 @@
 require './spec/spec_helper'
 
-
 RSpec.describe Cell do
 
   describe '#initialize' do
@@ -19,7 +18,7 @@ RSpec.describe Cell do
     end
 
     it 'has no ship' do
-      cell = Cell.new("B4")
+      
 
       expect(cell.ship).to eq(nil)
     end
