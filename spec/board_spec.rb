@@ -13,15 +13,15 @@ RSpec.describe Board do
   describe 'has proper attributes' do
     xit 'has cells' do
       board = Board.new
-      require 'pry'; binding.pry
-      expect(board.cells).to eq({})## havent figure out how to set this up yet
+
+      expect(board.cells).to be_a({})## havent figure out how to set this up yet
     #I think we might not need to actually write a test for it. 
     #Im not sure. my brain is fried right now
     end
   end
   
   describe 'valid coordinate?' do
-    xit 'checks if coordinate is valid or not' do
+    it 'checks if coordinate is valid or not' do
       board = Board.new
 
       expect(board.valid_coordinate?('A1')).to eq(true)
