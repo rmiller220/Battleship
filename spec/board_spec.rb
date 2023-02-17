@@ -70,10 +70,28 @@ RSpec.describe Board do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-
+      
       expect(board.place(cruiser, ["A1", "A2", "A3"])).to be(true)
       expect(board.valid_placement?(submarine, ["A1", "B1"])).to be(false)
       expect(board.place(submarine, ["A1", "B1"])).to be(false)
+    end
+  end
+  
+  describe 'render the board' do
+    it 'checks the render method' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+require 'pry'; binding.pry
+      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    xit 'checks the render method with variable' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
 end

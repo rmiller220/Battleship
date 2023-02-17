@@ -43,4 +43,37 @@ class Board
       false
     end
   end
+  def fired_upon?
+    @fired_upon
+  end
+  def fire_upon #I had to refactor this to accomodate the render method
+    if @fired_upon == false && self.empty?
+      @fired_upon = true
+    elsif @fired_upon == false && self.empty? == false
+      @fired_upon = true
+      @ship.hit
+    else
+      p "Can't fire"
+    end
+  end
+  def render(variable = nil)
+    cells_rendered = []
+    self.cells.each do |cell|
+      cells_rendered << cell.render
+    end
+    cells_rendered.to_s
+    # if variable && self.empty? == false
+    #   p "S"
+    # elsif variable && self.empty?
+    #   p "."
+    # elsif self.fired_upon? && self.empty? 
+    #   p "M" 
+    # elsif self.fired_upon? && self.empty? == false && ship.sunk? == false
+    #   p "H"
+    # elsif self.fired_upon? && self.empty? == false && ship.sunk?
+    #   p "X"
+    # else self.fired_upon? == false
+    #   p "."
+    # end
+  end
 end
