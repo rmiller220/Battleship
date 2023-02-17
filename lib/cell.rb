@@ -41,9 +41,7 @@ attr_reader :coordinate,
   end
 
   def render(variable = nil)
-    if variable && self.empty? == false
-      p "S"
-    elsif variable && self.empty?
+    if variable && self.empty?
       p "."
     elsif self.fired_upon? && self.empty? 
       p "M" 
@@ -51,6 +49,8 @@ attr_reader :coordinate,
       p "H"
     elsif self.fired_upon? && self.empty? == false && ship.sunk?
       p "X"
+    elsif variable && self.empty? == false
+      p "S"
     else self.fired_upon? == false
       p "."
     end
