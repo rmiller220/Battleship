@@ -51,7 +51,7 @@ attr_reader :coordinate,
       p "H"
     elsif self.fired_upon? && self.empty? == false && ship.sunk?
       p "X"
-    else self.fired_upon == false
+    else self.fired_upon? == false
       p "."
     end
   end
