@@ -22,9 +22,9 @@ attr_reader :coordinate,
   end
   
   def fire_upon
-    if @fired_upon = false
-      @fire_upon = true
-      @ship.health -= 1
+    if @fired_upon == false
+      @fired_upon = true
+      @ship.hit
     else
       p "Can't fire"
     end
