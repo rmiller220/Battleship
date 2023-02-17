@@ -1,10 +1,12 @@
 class Cell
 attr_reader :coordinate,
-            :ship
+            :ship,
+            :fired_upon
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
+    @fired_upon = false
   end
 
   def empty?
@@ -16,6 +18,23 @@ attr_reader :coordinate,
   end
 
   def place_ship(ship)
-    @ship = ship
+    if self.empty? == true
+      @ship = ship
+    else
+      false
+    end
+  end
+  
+  def fire_upon
+    if @fired_upon == false
+      @fired_upon = true
+      @ship.hit
+    else
+      p "Can't fire"
+    end
+  end
+
+  def fired_upon?
+    @fired_upon
   end
 end
