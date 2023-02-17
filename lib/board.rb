@@ -9,6 +9,7 @@ class Board
         @cells[coordinate] = Cell.new(coordinate)
       end
     end
+    @empty_check = false
   end
 
   def valid_coordinate?(coordinate)
@@ -18,11 +19,12 @@ class Board
   def valid_placement?(ship, coordinates)
     @split = []
     @split_values = []
+    @boolean_array = []
     coordinates.each { |coord| @split << coord.split("") }
     @split.each { |split| @split_values << (split.first.ord + split.last.ord) }
-    coordinates.each { |coordinate| @empty_ceck = @cells[coordinate].empty? }
-  
-    if coordinates.length == ship.length && @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1} == true && @empty_check == true
+    coordinates.each { |coordinate| @boolean_array << @cells[coordinate].empty? }
+    
+    if coordinates.length == ship.length && @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1} == true && @boolean_array.include?(false) == false
       true
     else
       false
@@ -30,10 +32,15 @@ class Board
   end
 
   def place(ship, coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(ship)
+    @boolean_array = []
+    coordinates.each { |coordinate| @boolean_array << @cells[coordinate].empty? }
+    if !@boolean_array.include?(false) 
+        coordinates.each do |coordinate|
+          @cells[coordinate].place_ship(ship)
+        end
+      true
+    else
+      false
     end
   end
-
-
 end
