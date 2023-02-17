@@ -54,7 +54,7 @@ RSpec.describe Cell do
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
 
-    expct(cell.fired_upon?).to eq(false)
+    expect(cell.fired_upon?).to eq(false)
     end
 
     it 'can be #fired_upon' do
@@ -63,7 +63,7 @@ RSpec.describe Cell do
       cell.place_ship(cruiser)
       cell.fire_upon
 
-      expct(cell.fired_upon?).to eq(true)
+      expect(cell.fired_upon?).to eq(true)
       expect(cell.ship.health).to eq(2)
     end
   end
