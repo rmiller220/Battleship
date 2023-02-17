@@ -19,16 +19,16 @@ class Board
     @split = []
     @split_values = []
     coordinates.each { |coord| @split << coord.split("") }
-    @split.each do |split| 
-      @split_values << (split.first.ord + split.last.ord)
-    end
-
-    if coordinates.length == ship.length && @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1} == true
+    @split.each { |split| @split_values << (split.first.ord + split.last.ord) }
+    coordinates.each { |coordinate| @empty_ceck = @cells[coordinate].empty? }
+  
+    if coordinates.length == ship.length && @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1} == true && @empty_check == true
       true
     else
       false
     end
   end
+
   def place(ship, coordinates)
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
