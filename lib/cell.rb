@@ -25,8 +25,10 @@ attr_reader :coordinate,
     end
   end
   
-  def fire_upon
-    if @fired_upon == false
+  def fire_upon #I had to refactor this to accomodate the render method
+    if @fired_upon == false && self.empty?
+      @fired_upon = true
+    elsif @fired_upon == false && self.empty? == false
       @fired_upon = true
       @ship.hit
     else
@@ -36,5 +38,21 @@ attr_reader :coordinate,
 
   def fired_upon?
     @fired_upon
+  end
+
+  def render(variable = nil)
+    if variable && self.empty? == false
+      p "S"
+    elsif variable && self.empty?
+      p "."
+    elsif self.fired_upon? && self.empty? 
+      p "M" 
+    elsif self.fired_upon? && self.empty? == false && ship.sunk? == false
+      p "H"
+    elsif self.fired_upon? && self.empty? == false && ship.sunk?
+      p "X"
+    else self.fired_upon == false
+      p "."
+    end
   end
 end
