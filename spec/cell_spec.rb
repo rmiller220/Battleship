@@ -71,37 +71,62 @@ RSpec.describe Cell do
   describe 'has working #render method' do
     it 'defaults #render to . ' do
       cell_1 = Cell.new("B4")
+      
+      expect(cell_1.render).to eq(".")
+    end
 
-      expect(cell.render).to eq(".")
+    it 'checks render if miss to be M' do 
+      cell_1 = Cell.new("B4")
+      cell_1.fire_upon
+
+      expect(cell_1.render).to eq("M")
+    end
+
+    it 'checks place ship with render to return .' do
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
+      cell_2.place_ship(cruiser)
+      
+      expect(cell_2.render).to eq('.')
+    end
+
+    it 'checks render with a hit to return H' do
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
+      cell_2.place_ship(cruiser)
+      cell_2.fire_upon
+  
+      expect(cell_2.render).to eq("H")
+    end
+    it 'renders X if ship is sunk' do
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
+      cell_2.place_ship(cruiser)
+      cell_2.fire_upon
+
+      expect(cruiser.sunk?).to eq(false)
+
+      cruiser.hit
+      cruiser.hit
+      
+      expect(cruiser.sunk?).to eq(true)
+      expect(cell_2.render).to eq("X")
+    end
+    #I moved these tests out of order to group it with similar method tests
+    #Feel free to move it back in the correct order if you prefer that
+  end
+  
+  describe 'optional render(true) method' do
+    it 'checks render(true)' do
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
+      cell_2.place_ship(cruiser)
+      
+      expect(cell_2.render(true)).to eq("S")
     end
   end
 end
 
-
-# cell_1.fire_upon
-
-# cell_1.render
-# # => "M"
-
-# cell_2 = Cell.new("C3")
-# # => #<Cell:0x00007f84f0b29d10...>
-
-# cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0ad4fb8...>
-
-# cell_2.place_ship(cruiser)
-
-# cell_2.render
-# # => "."
-
-# # Indicate that we want to show a ship with the optional argument
-# cell_2.render(true)
-# # => "S"
-
-# cell_2.fire_upon
-
-# cell_2.render
-# # => "H"
 
 # cruiser.sunk?
 # # => false
