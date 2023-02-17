@@ -10,16 +10,6 @@ RSpec.describe Board do
     end
   end
   
-  describe 'has proper attributes' do
-    xit 'has cells' do
-      board = Board.new
-
-      expect(board.cells).to be_a({})## havent figure out how to set this up yet
-    #I think we might not need to actually write a test for it. 
-    #Im not sure. my brain is fried right now
-    end
-  end
-  
   describe 'valid coordinate?' do
     it 'checks if coordinate is valid or not' do
       board = Board.new
@@ -33,7 +23,7 @@ RSpec.describe Board do
   end
 
   describe 'valid placement?' do
-    xit 'checks ship placement is not valid based on size' do
+    it 'checks ship placement is not valid based on size' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
@@ -42,7 +32,7 @@ RSpec.describe Board do
       expect(board.valid_placement?(submarine, ['A2', 'A3', 'A4'])).to eq(false)
     end
     
-    xit 'checks ship placement is not valid without consecutive coordinates' do
+    it 'checks ship placement is not valid without consecutive coordinates' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
@@ -53,7 +43,7 @@ RSpec.describe Board do
       expect(board.valid_placement?(submarine, ["C1", "B1"])).to be(false)
     end
 
-    xit 'checks ship placement not valid diagonally' do
+    it 'checks ship placement not valid diagonally' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
