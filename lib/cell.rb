@@ -18,7 +18,11 @@ attr_reader :coordinate,
   end
 
   def place_ship(ship)
-    @ship = ship
+    if self.empty? == true
+      @ship = ship
+    else
+      false
+    end
   end
   
   def fire_upon
