@@ -47,6 +47,26 @@ RSpec.describe Cell do
       expect(cell.empty?).to eq(false)
     end
   end
+
+  describe 'has working #fired_upon method' do
+    it 'has #fired_upon default to false' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+
+    expct(cell.fired_upon?).to eq(false)
+    end
+
+    it 'can be #fired_upon' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("Cruiser", 3)
+      cell.place_ship(cruiser)
+      cell.fire_upon
+
+      expct(cell.fired_upon?).to eq(true)
+      expect(cell.ship.health).to eq(2)
+    end
+  end
 end
 
 
