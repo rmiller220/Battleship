@@ -82,16 +82,72 @@ RSpec.describe Board do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       board.place(cruiser, ["A1", "A2", "A3"])
-require 'pry'; binding.pry
+      # require 'pry'; binding.pry
       expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
-
-    xit 'checks the render method with variable' do
+    
+    it 'checks the render method with variable' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       board.place(cruiser, ["A1", "A2", "A3"])
-
+      
       expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
+
+  describe 'checks hits and misses' do
+    it 'checks for a hit on the board' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["A1"].fire_upon
+      
+      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
+
+      board.cells["A2"].fire_upon
+      board.cells["A3"].fire_upon
+
+      expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it 'can hit, miss, sunk show player board' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["A1"].fire_upon
+      
+      expect(board.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
+      board.cells["A4"].fire_upon
+      board.cells["A2"].fire_upon
+      board.cells["A3"].fire_upon
+
+      expect(board.render).to eq("  1 2 3 4 \nA X X X M \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it 'adds 2 ships, checks hit, miss, sunk' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+      submarine = Ship.new("Submarine", 2)
+      board.place(submarine, ["C3", "D3"])
+      
+      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n")
+      
+      board.cells["A1"].fire_upon
+      board.cells["B1"].fire_upon
+      board.cells["B3"].fire_upon
+      board.cells["D1"].fire_upon
+      board.cells["C3"].fire_upon
+      board.cells["D4"].fire_upon
+      board.cells["A4"].fire_upon
+      board.cells["A2"].fire_upon
+      board.cells["A3"].fire_upon
+      
+      expect(board.render).to eq("  1 2 3 4 \nA X X X M \nB M . M . \nC . . H . \nD M . . M \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . H . \nD . . S . \n")
+    end
+  end
+
 end

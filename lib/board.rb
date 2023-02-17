@@ -43,9 +43,7 @@ class Board
       false
     end
   end
-  def fired_upon?
-    @fired_upon
-  end
+  
   def fire_upon #I had to refactor this to accomodate the render method
     if @fired_upon == false && self.empty?
       @fired_upon = true
@@ -57,23 +55,17 @@ class Board
     end
   end
   def render(variable = nil)
-    cells_rendered = []
-    self.cells.each do |cell|
-      cells_rendered << cell.render
+    heading = "  1 2 3 4 \n"
+    ("A".."D").each do |letter|
+      heading += "#{letter} "
+      (1..4).each do |number|
+        coordinate = letter + number.to_s
+        cell = @cells[coordinate]
+        heading += cell.render(variable)
+        heading += " "
+      end
+      heading += "\n"
     end
-    cells_rendered.to_s
-    # if variable && self.empty? == false
-    #   p "S"
-    # elsif variable && self.empty?
-    #   p "."
-    # elsif self.fired_upon? && self.empty? 
-    #   p "M" 
-    # elsif self.fired_upon? && self.empty? == false && ship.sunk? == false
-    #   p "H"
-    # elsif self.fired_upon? && self.empty? == false && ship.sunk?
-    #   p "X"
-    # else self.fired_upon? == false
-    #   p "."
-    # end
+    heading
   end
 end

@@ -112,8 +112,6 @@ RSpec.describe Cell do
       expect(cruiser.sunk?).to eq(true)
       expect(cell_2.render).to eq("X")
     end
-    #I moved these tests out of order to group it with similar method tests
-    #Feel free to move it back in the correct order if you prefer that
   end
   
   describe 'optional render(true) method' do
@@ -126,20 +124,6 @@ RSpec.describe Cell do
     end
   end
 end
-
-
-# cruiser.sunk?
-# # => false
-
-# cruiser.hit
-
-# cruiser.hit
-
-# cruiser.sunk?
-# # => true
-
-# cell_2.render
-# # => "X"
 
 
 
