@@ -15,24 +15,6 @@ class Board
     @cells.key?"#{coordinate}"
   end
 
-  # def valid_placement?(ship, coordinates)
-  #   consecutive_row = coordinates.each_cons(2).any? { |a,b| a.ord - b.ord == 0}
-  #   consecutive_column = coordinates.each_cons(2).any? { |a,b| a.ord - b.ord == 1}
-  #   if coordinates.length == ship.length && consecutive_row == true
-  #     coordinates.each do |coordinate|
-  #       @cells["#{coordinate}"] = ship
-  #     end
-  #     true
-  #   elsif coordinates.length == ship.length && consecutive_column == true
-  #     coordinates.each do |coordinate|
-  #       @cells["#{coordinate}"] = ship
-  #     end
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
-
   def valid_placement?(ship, coordinates)
     @split = []
     @split_values = []
@@ -47,5 +29,11 @@ class Board
       false
     end
   end
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+    end
+  end
+
 
 end
