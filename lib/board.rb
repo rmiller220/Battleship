@@ -24,12 +24,14 @@ class Board
     @split.each { |split| @split_values << (split.first.ord + split.last.ord) }
     coordinates.each { |coordinate| @boolean_array << @cells[coordinate].empty? }
     
-    if coordinates.length == ship.length && @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1} == true && @boolean_array.include?(false) == false
+    if coordinates.length == ship.length && consecutive_check(coordinates) == true && @boolean_array.include?(false) == false
       true
     else
       false
     end
   end
+
+  #@split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
 
   def place(ship, coordinates)
     @boolean_array = []
@@ -67,5 +69,22 @@ class Board
       heading += "\n"
     end
     heading
+  end
+
+  def consecutive_check(coordinates)
+    @first_values = []
+    @split = []
+    @split_values = []
+    coordinates.each { |coord| @split << coord.split("") }
+    @split.each { |split| @first_values << (split.first.ord) }
+    coordinates.each do |coordinate|
+      if @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 }
+        @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
+      elsif @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 }
+        @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } 
+      else
+        false
+      end
+    end
   end
 end
