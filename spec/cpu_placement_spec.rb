@@ -8,7 +8,6 @@ RSpec.describe CpuPlacement do
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     cruiser_placement = CpuPlacement.new(cruiser, board)
-
     expect(cruiser_placement.cpu_placement).to eq(true)
     end
   end
