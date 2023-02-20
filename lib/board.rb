@@ -1,11 +1,14 @@
 class Board
-  attr_reader :cells
+  attr_reader :cells,
+              :coordinate_array
 
   def initialize
     @cells = {}
+    @coordinate_array = []
     ("A".."D").each do |letter|
       (1..4).each do |number|
         coordinate = letter + number.to_s
+        @coordinate_array << coordinate
         @cells[coordinate] = Cell.new(coordinate)
       end
     end
@@ -23,14 +26,13 @@ class Board
     @split.each { |split| @split_values << (split.first.ord + split.last.ord) }
     coordinates.each { |coordinate| @boolean_array << @cells[coordinate].empty? }
     
-    if coordinates.length == ship.length && consecutive_check(coordinates) == true && @boolean_array.include?(false) == false
-      true
+    if coordinates.length == ship.length && consecutive_check(ship, coordinates) == true && @boolean_array.all?(true)
+      valid = true
     else
-      false
+      valid = false
     end
+    valid
   end
-
-  #@split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
 
   def place(ship, coordinates)
     @boolean_array = []
@@ -70,20 +72,40 @@ class Board
     heading
   end
 
-  def consecutive_check(coordinates)
+  def consecutive_check(ship, coordinates)
+    valid = false
     @first_values = []
+    @last_values = []
     @split = []
     @split_values = []
     coordinates.each { |coord| @split << coord.split("") }
     @split.each { |split| @first_values << (split.first.ord) }
+    @split.each { |split| @last_values << (split.last.ord) }
     coordinates.each do |coordinate|
-      if @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 }
-        @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
-      elsif @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 }
-        @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } 
+      if ship.length == 3
+        if @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0} && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1} 
+          valid = true
+        elsif @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1 } && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0} 
+          valid = true
+        else
+          valid = false
+        end
+      elsif ship.length == 2
+        if @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } && @last_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
+        valid = true
+        elsif @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } && @last_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } 
+          valid = true
+        else
+          valid = false
+        end
       else
-        false
+        valid = false
       end
     end
+    valid
+  end
+
+  def coordinate_shuffle
+    @coordinate_array.shuffle!
   end
 end
