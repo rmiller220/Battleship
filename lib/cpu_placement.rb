@@ -11,17 +11,5 @@ class CpuPlacement
     @coordinates = []
   end
 
-  def cpu_placement
-    @coordinate_array = []
-      ("A".."D").each do |letter|
-        (1..4).each do |number|
-          coordinate = letter + number.to_s
-          @coordinate_array << coordinate
-        end
-      end
-    until  (board.valid_placement?(@ship, @coordinates)) == true
-      @coordinates = @coordinate_array.sample(@ship.length)
-    end
-    @coordinates
-  end
+  
 end

@@ -45,7 +45,7 @@ class Board
     end
   end
   
-  def fire_upon #I had to refactor this to accomodate the render method
+  def fire_upon 
     if @fired_upon == false && self.empty?
       @fired_upon = true
     elsif @fired_upon == false && self.empty? == false
@@ -83,6 +83,15 @@ class Board
         @split_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } 
       else
         false
+      end
+    end
+  end
+  def cpu_placement(ship)
+    loop do
+      random_coordinate = @cells.keys.sample(ship.length)
+      if valid_placement?(ship, random_coordinate)
+        place(ship, random_coordinate)
+        return random_coordinate
       end
     end
   end
