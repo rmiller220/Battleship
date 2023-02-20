@@ -9,7 +9,6 @@ class Board
         @cells[coordinate] = Cell.new(coordinate)
       end
     end
-    @empty_check = false
   end
 
   def valid_coordinate?(coordinate)
