@@ -9,8 +9,9 @@ RSpec.describe do
     end
     it 'says Welcome to Battleship' do
       game = Game.new
-      # require 'pry'; binding.pry
+      board = Board.new
       expect(game.start).to eq("Welcome to BATTLESHIP Enter p to play. Enter q to quit")
+      require 'pry'; binding.pry
     end
   end
 end
