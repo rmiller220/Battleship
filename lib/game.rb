@@ -35,26 +35,30 @@ class Game
     place_player_cruiser
   end
   
-  # def place_player_cruiser
-  # input = gets.chomp
-  #   if input = @player_board.valid_coordinate? && @player_board.place
-  #     @player_board.render(true)
-  #     p "Enter the squares for the Submarine (2 spaces)"
-  #     place_player_sub
-  #   else 
-  #     p "Those area invalid coordinates. Please try again:"
-  #     place_player_cruiser
-  #   end
-  # end
+  def place_player_cruiser
+  input = gets.chomp
+  input_array = input.split(" ")
+    if input = @player_board.valid_placement?(@cruiser, input_array)
+      @player_board.place(@cruiser, input_array)
+      @player_board.render(true)
+      p "Enter the squares for the Submarine (2 spaces)"
+      place_player_sub
+    else 
+      p "Those area invalid coordinates. Please try again (eg: A1 A2 A3):"
+      place_player_cruiser
+    end
+  end
 
-  # def place_player_sub
-  # input = gets.chomp
-  #   if input = @player_board.valid_coordinate? && @player_board.place
-  #     @player_board.render(true)
-  #     start_turn
-  #   else 
-  #     p "Those are invalid coordinates. Please try again:"
-  #     place_player_sub
-  #   end
-  # end
+  def place_player_sub
+  input = gets.chomp
+  input_array = input.split(" ")
+    if input = @player_board.valid_placement?(@submarine, input_array)
+      @player_board.place(@submarine, input_array)
+      @player_board.render(true)
+      start_turn
+    else 
+      p "Those are invalid coordinates. Please try again:"
+      place_player_sub
+    end
+  end
 end
