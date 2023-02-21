@@ -22,7 +22,7 @@ class CpuPlacement
       end
     @coordinates = coordinate_array.sample(@ship.length) 
     @coordinates = coordinate_array.sample(@ship.length) until (board.valid_placement?(@ship, @coordinates)) == true
-    board.place(@ship, @coordinates)
     board.valid_placement?(@ship, @coordinates)
+    board.place(@ship, @coordinates)
   end
 end
