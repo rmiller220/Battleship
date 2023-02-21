@@ -108,4 +108,5 @@ class Board
   def coordinate_shuffle
     @coordinate_array.shuffle!
   end
+  
 end
