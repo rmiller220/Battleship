@@ -33,8 +33,8 @@ class Game
   def start_game
     @cpu_placement_cruiser.cpu_placement
     @cpu_placement_submarine.cpu_placement
-    p "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long."
-    @cpu_board.render
+    puts "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long."
+    print @cpu_board.render
     p "Enter the squares for the Cruiser (3 spaces)"
     place_player_cruiser
   end

@@ -3,6 +3,8 @@ class Turn
   def initialize(board_1, board_2)
     @board_1 = board_1
     @board_2 = board_2
+    @cpu_sunk_ships = []
+    @player_sunk_ships = []
   end
 
   def start_turn
@@ -28,6 +30,8 @@ class Turn
         p "Your shot on #{player_fire_upon} was a hit!"
       elsif @board_1.cells["#{player_fire_upon}"].render == "X"
         p "Your shot on #{player_fire_upon} sunk a ship!"
+        @player_sunk_ships << @board_1.ship.sunk?
+        end_game_player
       else
         p "?"
       end
@@ -55,7 +59,27 @@ class Turn
       p "My shot on #{cpu_fire_coords} was a hit!"
     else @board_2.cells[cpu_fire_coords].render == "X"
       p "My shot on #{cpu_fire_coords} sunk a ship!"
+      @cpu_sunk_ships << @board_2.ship.sunk?
+       end_game_cpu
     end
     start_turn
+  end
+  def end_game_cpu
+    if @cpu_sunk_ships.size == 2
+      puts "I won!"
+      game = Game.new
+      game.start
+    else
+      player_shot
+    end
+  end
+  def end_game_player
+    if @player_sunk_ships.size == 2
+      puts "You won!"
+      game = Game.new
+      game.start
+    else
+      cpu_shot
+    end
   end
 end
