@@ -4,6 +4,7 @@ class Board
 
   def initialize
     @cells = {}
+    @ship = nil
     @coordinate_array = []
     ("A".."D").each do |letter|
       (1..4).each do |number|
@@ -40,6 +41,7 @@ class Board
     if !@boolean_array.include?(false) 
         coordinates.each do |coordinate|
           @cells[coordinate].place_ship(ship)
+          @ship = ship
         end
       true
     else
@@ -47,14 +49,17 @@ class Board
     end
   end
   
-  def fire_upon #I had to refactor this to accomodate the render method
-    if @fired_upon == false && self.empty?
-      @fired_upon = true
-    elsif @fired_upon == false && self.empty? == false
-      @fired_upon = true
+  def fire_upon(coordinate = nil) 
+    coordinate_s = coordinate.to_s
+    cell = self.cells["#{coordinate_s}"]
+    if cell.fired_upon? == false && cell.empty?
+      cell.fired_upon = true
+    elsif cell.fired_upon? == false && cell.empty? == false
+      cell.fired_upon = true
       @ship.hit
     else
       p "Can't fire"
+      false
     end
   end
   def render(variable = nil)
