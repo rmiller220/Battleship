@@ -1,7 +1,7 @@
 class Cell
 attr_reader :coordinate,
-            :ship,
-            :fired_upon
+            :ship
+attr_accessor :fired_upon
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -37,7 +37,7 @@ attr_reader :coordinate,
   end
 
   def fired_upon?
-    @fired_upon
+      @fired_upon
   end
 
   def render(variable = nil)
