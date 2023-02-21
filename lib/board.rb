@@ -52,15 +52,16 @@ class Board
   def fire_upon(coordinate = nil) 
     coordinate_s = coordinate.to_s
     cell = self.cells["#{coordinate_s}"]
-    if cell.fired_upon? == false && cell.empty?
+    if cell.fired_upon == false && cell.empty?
       cell.fired_upon = true
-    elsif cell.fired_upon? == false && cell.empty? == false
+    elsif cell.fired_upon == false && cell.empty? == false
       cell.fired_upon = true
       @ship.hit
     else
       false
     end
   end
+  
   def render(variable = nil)
     heading = "  1 2 3 4 \n"
     ("A".."D").each do |letter|
