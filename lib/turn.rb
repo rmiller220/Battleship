@@ -1,24 +1,26 @@
 require './lib/game'
 class Turn 
-  def initialize
-    
+  def initialize(board_1, board_2)
+    @board_1 = board_1
+    @board_2 = board_2
   end
 
   def start_turn
     p "Computer's board"
-    @cpu_board.render
+    @board_1.render
     p "Player board"
-    @player_board.render(true)
+    @board_2.render(true)
    player_shot
   end
+
   def player_shot
     p "Please enter a coordinate to fire upon!"
     player_fire_upon = gets.chomp.upcase
-    if @cpu_board.cell(player_fire_upon).fired_upon? == false
-      @cpu_board.cells(player_fire_upon).fire_upon
-      if @cpu_board.render += "M"
+    if @board_1.fire_upon(player_fire_upon) == true
+      @board_1.fire_upon(player_fire_upon)
+      if @board_1.render == "M"
         p "Your shot on #{player_fire_upon} was a miss"
-      elsif @cpu_board.render += "H"
+      elsif @board_1.render == "H"
         p "Your shot on #{player_fire_upon} was a hit!"
       else 
         p "Your shot on #{player_fire_upon} sunk a ship!"
@@ -41,9 +43,9 @@ class Turn
     coordinate_array.sample.fire_upon until fire_upon(coordinate_array.sample) != false
     cpu_fired_shot = coordinate_array.sample.fire_upon
 
-    if @player_board.render += "M"
+    if @board_2.render += "M"
       p "My shot on #{cpu_fired_shot} was a miss"
-    elsif @player_board.render += "H"
+    elsif @board_2.render += "H"
       p "My shot on #{cpu_fired_shot} was a hit!"
     else 
       p "My shot on #{cpu_fired_shot} sunk a ship!"
