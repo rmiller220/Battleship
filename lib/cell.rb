@@ -37,22 +37,33 @@ attr_accessor :fired_upon
   end
 
   def fired_upon?
-      @fired_upon
+    @fired_upon
   end
 
   def render(variable = nil)
-    if variable && self.empty?
-      p "."
+    if self.fired_upon? && self.empty? == false && self.ship.sunk?
+      p "X"
+    elsif self.fired_upon? && self.empty? == false && @ship.sunk? == false
+      p "H"
     elsif self.fired_upon? && self.empty? 
       p "M" 
-    elsif self.fired_upon? && self.empty? == false && ship.sunk? == false
-      p "H"
-    elsif self.fired_upon? && self.empty? == false && ship.sunk?
-      p "X"
     elsif variable && self.empty? == false
       p "S"
+    elsif variable && self.empty?
+      p "."
     else self.fired_upon? == false
       p "."
     end
+    # if !variable.empty? 
+    #   if ship.sunk?
+    #     p "X"
+    #   elsif self.empty? == true
+    #     p "H"
+    #   elsif 
+    #     p "S"
+    #   else
+    #     p "."
+    # else 
+    #   if
   end
 end

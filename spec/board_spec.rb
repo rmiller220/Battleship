@@ -146,7 +146,7 @@ RSpec.describe Board do
       board.cells["A3"].fire_upon
       
       expect(board.render).to eq("  1 2 3 4 \nA X X X M \nB M . M . \nC . . H . \nD M . . M \n")
-      expect(board.render(true)).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . H . \nD . . S . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA X X X M \nB M . M . \nC . . H . \nD M . S M \n")
     end
   end
 
