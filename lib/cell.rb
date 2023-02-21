@@ -40,8 +40,8 @@ attr_accessor :fired_upon
     @fired_upon
   end
 
-  def render(variable = nil)
-    if self.fired_upon? && self.empty? == false && self.ship.sunk?
+  def render(variable = false)
+    if self.fired_upon? && self.empty? == false && @ship.sunk?
       "X"
     elsif self.fired_upon? && self.empty? == false && @ship.sunk? == false
       "H"

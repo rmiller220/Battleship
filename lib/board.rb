@@ -44,6 +44,7 @@ class Board
           @cells[coordinate].place_ship(ship)
           @ship = ship
         end
+
       true
     else
       false
@@ -52,9 +53,11 @@ class Board
   
   def fire_upon(coordinate = nil) 
     coordinate_s = coordinate.to_s
-    cell = self.cells["#{coordinate_s}"]
+    cell = self.cells[coordinate_s]
     if cell.fired_upon == false && cell.empty?
       cell.fired_upon = true
+      # sunk_check = self.ship.sunk? 
+      # self.cells[key] = sunk_check
     elsif cell.fired_upon == false && cell.empty? == false
       cell.fired_upon = true
       @ship.hit
@@ -63,7 +66,7 @@ class Board
     end
   end
   
-  def render(variable = nil)
+  def render(variable = false)
     heading = "  1 2 3 4 \n"
     ("A".."D").each do |letter|
       heading += "#{letter} "
