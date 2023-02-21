@@ -23,14 +23,15 @@ class Turn
       player_shot
     end
     if @board_1.cells[player_fire_upon].fired_upon? == false
-      @board_1.fire_upon(player_fire_upon)
-      if @board_1.cells["#{player_fire_upon}"].render == "M"
+      require 'pry'; binding.pry
+      @board_1.cells[player_fire_upon].fire_upon
+      if @board_1.cells[player_fire_upon].render == "M"
         p "Your shot on #{player_fire_upon} was a miss"
-      elsif @board_1.cells["#{player_fire_upon}"].render == "H"
+      elsif @board_1.cells[player_fire_upon].render == "H"
         p "Your shot on #{player_fire_upon} was a hit!"
-      elsif @board_1.cells["#{player_fire_upon}"].render == "X"
+      elsif @board_1.cells[player_fire_upon].render == "X"
         p "Your shot on #{player_fire_upon} sunk a ship!"
-        @player_sunk_ships << @board_1.ship.sunk?
+        @player_sunk_ships << @board_1.cells[player_fire_upon].ship.sunk?
         end_game_player
       else
         p "?"
@@ -52,14 +53,14 @@ class Turn
     end
     cpu_fire_coords = coordinate_array.sample
     cpu_fire_coords = coordinate_array.sample until @board_2.cells[cpu_fire_coords].fired_upon? == false
-    @board_2.fire_upon(cpu_fire_coords)
-    if @board_2.cells[cpu_fire_coords].render == "M"
+    @board_2.cells[cpu_fire_coords].fire_upon
+    if @board_2.cells[cpu_fire_coords].render(true) == "M"
       p "My shot on #{cpu_fire_coords} was a miss"
-    elsif @board_2.cells[cpu_fire_coords].render == "H"
+    elsif @board_2.cells[cpu_fire_coords].render(true) == "H"
       p "My shot on #{cpu_fire_coords} was a hit!"
-    else @board_2.cells[cpu_fire_coords].render == "X"
+    else @board_2.cells[cpu_fire_coords].render(true) == "X"
       p "My shot on #{cpu_fire_coords} sunk a ship!"
-      @cpu_sunk_ships << @board_2.ship.sunk?
+      @cpu_sunk_ships << @board_2.cells[cpu_fire_coords].ship.sunk?
        end_game_cpu
     end
     start_turn
