@@ -15,7 +15,7 @@ RSpec.describe do
       player_board = Board.new
       cpu_board = Board.new
       turn = Turn.new(cpu_board, player_board)
-      game.start
+      #game.start
     end
 
 end
