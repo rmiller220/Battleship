@@ -10,7 +10,7 @@ class Turn
     @board_1.render
     p "Player board"
     @board_2.render(true)
-   player_shot
+    player_shot
   end
 
   def player_shot
@@ -18,9 +18,9 @@ class Turn
     player_fire_upon = gets.chomp.upcase
     if @board_1.fire_upon(player_fire_upon) == true
       @board_1.fire_upon(player_fire_upon)
-      if @board_1.render == "M"
+      if @board_1.cells["#{player_fire_upon}"].render == "M"
         p "Your shot on #{player_fire_upon} was a miss"
-      elsif @board_1.render == "H"
+      elsif @board_1.cells["#{player_fire_upon}"].render == "H"
         p "Your shot on #{player_fire_upon} was a hit!"
       else 
         p "Your shot on #{player_fire_upon} sunk a ship!"
@@ -29,6 +29,7 @@ class Turn
       p "Please enter a valid coordinate"
       player_shot
     end
+    cpu_shot
   end
 
   def cpu_shot
@@ -39,15 +40,13 @@ class Turn
         coordinate_array << coordinate
       end
     end
-    cpu_fired_shot = coordinate_array.sample.fire_upon
-    coordinate_array.sample.fire_upon until fire_upon(coordinate_array.sample) != false
-    cpu_fired_shot = coordinate_array.sample.fire_upon
-
-    if @board_2.render += "M"
+    cpu_fired_shot = @board_2.fire_upon(coordinate_array.sample) until cpu_fired_shot != false
+    @board_2.fire_upon(coordinate_array.sample)
+    if @board_2.cells[coordinate_array.sample].render == "M"
       p "My shot on #{cpu_fired_shot} was a miss"
-    elsif @board_2.render += "H"
+    elsif @board_2.cells[coordinate_array.sample].render == "H"
       p "My shot on #{cpu_fired_shot} was a hit!"
-    else 
+    else @board_2.cells[coordinate_array.sample].render == "X"
       p "My shot on #{cpu_fired_shot} sunk a ship!"
     end
     start_turn
