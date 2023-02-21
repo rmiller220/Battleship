@@ -1,4 +1,6 @@
 require './lib/cpu_placement'
+require './lib/turn'
+# attr_reader :cpu_board, :player_board
 class Game
   
   def initialize
@@ -55,7 +57,7 @@ class Game
     if input = @player_board.valid_placement?(@submarine, input_array)
       @player_board.place(@submarine, input_array)
       @player_board.render(true)
-      start_turn
+      turn.start_turn
     else 
       p "Those are invalid coordinates. Please try again:"
       place_player_sub
