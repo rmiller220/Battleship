@@ -32,7 +32,7 @@ attr_accessor :fired_upon
       @fired_upon = true
       @ship.hit
     else
-      p "Can't fire"
+      false
     end
   end
 

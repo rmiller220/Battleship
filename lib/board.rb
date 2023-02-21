@@ -58,7 +58,6 @@ class Board
       cell.fired_upon = true
       @ship.hit
     else
-      p "Can't fire"
       false
     end
   end
