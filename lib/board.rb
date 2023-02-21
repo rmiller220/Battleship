@@ -1,6 +1,7 @@
 class Board
   attr_reader :cells,
-              :coordinate_array
+              :coordinate_array, 
+              :ship
 
   def initialize
     @cells = {}
@@ -74,6 +75,7 @@ class Board
       end
       heading += "\n"
     end
+    print heading
     heading
   end
 
