@@ -1,6 +1,6 @@
 require './lib/cpu_placement'
 require './lib/turn'
-# attr_reader :cpu_board, :player_board
+
 class Game
   attr_reader :cpu_board,
               :player_board
@@ -31,7 +31,6 @@ class Game
     end
   end
   
-
   def start_game
     @cpu_placement_cruiser.cpu_placement
     @cpu_placement_submarine.cpu_placement
@@ -64,7 +63,7 @@ class Game
       turn = Turn.new(@cpu_board, @player_board)
       turn.start_turn
     else 
-      p "Those are invalid coordinates. Please try again:"
+      p "Those are invalid coordinates. Please try again (eg: B1 B2):"
       place_player_sub
     end
   end

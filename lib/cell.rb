@@ -25,7 +25,7 @@ attr_reader :coordinate,
     end
   end
   
-  def fire_upon #I had to refactor this to accomodate the render method
+  def fire_upon
     if @fired_upon == false && self.empty?
       @fired_upon = true
     elsif @fired_upon == false && self.empty? == false

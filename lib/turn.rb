@@ -41,7 +41,9 @@ class Turn
       p "Please enter a valid coordinate"
       player_shot
     end
+    p "Computer's Board"
     @cpu_board.render
+    p "Player's Board"
     @player_board.render(true)
     cpu_shot
   end
@@ -71,7 +73,9 @@ class Turn
     boolean_array = []
     @player_board.ship.each { |ship| boolean_array << ship.sunk? }
     if boolean_array.all?(true)
+      p "Computer's Board"
       @cpu_board.render
+      p "Player's Board"
       @player_board.render(true)
       puts "CPU won!"
       game = Game.new
@@ -84,7 +88,9 @@ class Turn
     boolean_array = []
     @cpu_board.ship.each { |ship| boolean_array << ship.sunk? }
     if boolean_array.all?(true)
+      p "Computer's Board"
       @cpu_board.render
+      p "Player's Board"
       @player_board.render(true)
       puts "You won!"
       game = Game.new
