@@ -62,7 +62,7 @@ class Game
       turn = Turn.new(@cpu_board, @player_board)
       turn.start_turn
     else 
-      p "Those are invalid coordinates. Please try again:"
+      p "Those are invalid coordinates. Please try again (eg: B1 B2):"
       place_player_sub
     end
   end
