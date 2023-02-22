@@ -1,7 +1,7 @@
 class Cell
 attr_reader :coordinate,
-            :ship
-attr_accessor :fired_upon
+            :ship,
+            :fired_upon
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -29,8 +29,8 @@ attr_accessor :fired_upon
     if @fired_upon == false && self.empty?
       @fired_upon = true
     elsif @fired_upon == false && self.empty? == false
-      @fired_upon = true
       @ship.hit
+      @fired_upon = true
     else
       false
     end
@@ -41,29 +41,20 @@ attr_accessor :fired_upon
   end
 
   def render(variable = false)
-    if self.fired_upon? && self.empty? == false && @ship.sunk?
-      "X"
-    elsif self.fired_upon? && self.empty? == false && @ship.sunk? == false
+    if @fired_upon == true && self.empty? == false && @ship.health > 0
       "H"
-    elsif self.fired_upon? && self.empty? 
-      "M" 
-    elsif variable && self.empty? == false
+    elsif @fired_upon == true && self.empty? == false && @ship.health <= 0
+      "X"
+    elsif variable == true && self.empty? == false && @fired_upon == false
       "S"
-    elsif variable && self.empty?
+    elsif @fired_upon == true && self.empty? 
+      "M" 
+    elsif variable == true && self.empty?
       "."
-    else self.fired_upon? == false
+    elsif @fired_upon == false
       "."
+    else 
+      "?"
     end
-    # if !variable.empty? 
-    #   if ship.sunk?
-    #     p "X"
-    #   elsif self.empty? == true
-    #     p "H"
-    #   elsif 
-    #     p "S"
-    #   else
-    #     p "."
-    # else 
-    #   if
   end
 end
