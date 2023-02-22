@@ -8,10 +8,5 @@ RSpec.describe do
       expect(game).to be_a(Game)
       game.start
     end
-    xit 'says Welcome to Battleship' do
-      game = Game.new
-      # require 'pry'; binding.pry
-      #game.start
-    end
   end
 end
