@@ -8,10 +8,12 @@ class Game
   def initialize
     @cpu_board = Board.new
     @player_board = Board.new
-    @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
-    @cpu_placement_cruiser = CpuPlacement.new(@cruiser, @cpu_board)
-    @cpu_placement_submarine = CpuPlacement.new(@submarine, @cpu_board)
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @player_submarine = Ship.new("Submarine", 2)
+    @cpu_cruiser = Ship.new("Cruiser", 3)
+    @cpu_submarine = Ship.new("Submarine", 2)
+    @cpu_placement_cruiser = CpuPlacement.new(@cpu_cruiser, @cpu_board)
+    @cpu_placement_submarine = CpuPlacement.new(@cpu_submarine, @cpu_board)
   end
 
   def start
@@ -42,8 +44,8 @@ class Game
   def place_player_cruiser
   input = gets.chomp
   input_array = input.split(" ")
-    if input = @player_board.valid_placement?(@cruiser, input_array)
-      @player_board.place(@cruiser, input_array)
+    if input = @player_board.valid_placement?(@player_cruiser, input_array)
+      @player_board.place(@player_cruiser, input_array)
       @player_board.render(true)
       p "Enter the squares for the Submarine (2 spaces)"
       place_player_sub
@@ -56,8 +58,8 @@ class Game
   def place_player_sub
   input = gets.chomp
   input_array = input.split(" ")
-    if input = @player_board.valid_placement?(@submarine, input_array)
-      @player_board.place(@submarine, input_array)
+    if input = @player_board.valid_placement?(@player_submarine, input_array)
+      @player_board.place(@player_submarine, input_array)
       @player_board.render(true)
       turn = Turn.new(@cpu_board, @player_board)
       turn.start_turn

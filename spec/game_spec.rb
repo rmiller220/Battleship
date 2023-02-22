@@ -11,7 +11,7 @@ RSpec.describe do
     xit 'says Welcome to Battleship' do
       game = Game.new
       # require 'pry'; binding.pry
-      game.start
+      #game.start
     end
   end
 end

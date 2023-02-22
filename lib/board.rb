@@ -5,7 +5,7 @@ class Board
 
   def initialize
     @cells = {}
-    @ship = nil
+    @ship = []
     @coordinate_array = []
     ("A".."D").each do |letter|
       (1..4).each do |number|
@@ -42,25 +42,9 @@ class Board
     if !@boolean_array.include?(false) 
         coordinates.each do |coordinate|
           @cells[coordinate].place_ship(ship)
-          @ship = ship
         end
-
+      @ship << ship
       true
-    else
-      false
-    end
-  end
-  
-  def fire_upon(coordinate = nil) 
-    coordinate_s = coordinate.to_s
-    cell = self.cells[coordinate_s]
-    if cell.fired_upon == false && cell.empty?
-      cell.fired_upon = true
-      # sunk_check = self.ship.sunk? 
-      # self.cells[key] = sunk_check
-    elsif cell.fired_upon == false && cell.empty? == false
-      cell.fired_upon = true
-      @ship.hit
     else
       false
     end
