@@ -115,6 +115,7 @@ class Game
   if @battleship == false
     place_player_cruiser
   end
+  @cpu_placement_battleship.cpu_placement
   p "Enter the coordinates for the Battleship (3 spaces eg A1 A2 A3)"
   input = gets.chomp
   input_array = input.split(" ")
