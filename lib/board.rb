@@ -81,9 +81,9 @@ def initialize(row = "D", column = 4)
     @split.each { |split| @last_values << (split.last.ord) }
     coordinates.each do |coordinate|
       if ship.length == 3
-        if @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0} && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1} 
+        if @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0 } && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1 } 
           valid = true
-        elsif @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1 } && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0} 
+        elsif @first_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == -1 && b.ord - c.ord == -1 } && @last_values.each_cons(3).all? { |a,b,c| a.ord - b.ord == 0 && b.ord - c.ord == 0 } 
           valid = true
         else
           valid = false
@@ -92,6 +92,22 @@ def initialize(row = "D", column = 4)
         if @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } && @last_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } 
         valid = true
         elsif @first_values.each_cons(2).all? { |a,b| a.ord - b.ord == -1 } && @last_values.each_cons(2).all? { |a,b| a.ord - b.ord == 0 } 
+          valid = true
+        else
+          valid = false
+        end
+      elsif ship.length == 4
+        if @first_values.each_cons(4).all? { |a,b,c,d| a.ord - b.ord == 0 && b.ord - c.ord == 0 && c.ord - d.ord == 0 } && @last_values.each_cons(4).all? { |a,b,c,d| a.ord - b.ord == -1 && b.ord - c.ord == -1 && c.ord - d.ord == -1 } 
+          valid = true
+        elsif @first_values.each_cons(4).all? { |a,b,c,d| a.ord - b.ord == -1 && b.ord - c.ord == -1 && c.ord - d.ord == -1 } && @last_values.each_cons(4).all? { |a,b,c,d| a.ord - b.ord == 0 && b.ord - c.ord == 0 && c.ord - d.ord == 0 } 
+          valid = true
+        else
+          valid = false
+        end
+      elsif ship.length == 5
+        if @first_values.each_cons(5).all? { |a,b,c,d,e| a.ord - b.ord == 0 && b.ord - c.ord == 0 && c.ord - d.ord == 0 && d.ord - e.ord == 0 } && @last_values.each_cons(5).all? { |a,b,c,d,e| a.ord - b.ord == -1 && b.ord - c.ord == -1 && c.ord - d.ord == -1 && d.ord - e.ord == -1 } 
+          valid = true
+        elsif @first_values.each_cons(5).all? { |a,b,c,d,e| a.ord - b.ord == -1 && b.ord - c.ord == -1 && c.ord - d.ord == -1 && d.ord - e.ord == -1 } && @last_values.each_cons(5).all? { |a,b,c,d,e| a.ord - b.ord == 0 && b.ord - c.ord == 0 && c.ord - d.ord == 0 && d.ord - e.ord == 0 } 
           valid = true
         else
           valid = false
