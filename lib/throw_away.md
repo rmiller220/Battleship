@@ -27,3 +27,4 @@
    * Refactor board render heading
    * Refactor dialogue into dialogue module
    * Refactor Game to have game_ship_generator type of method
+   * Refactor for board the make sure there is space for all ships
