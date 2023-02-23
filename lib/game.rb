@@ -84,7 +84,8 @@ class Game
     @cpu_placement_cruiser.cpu_placement
     @cpu_placement_submarine.cpu_placement
     puts "I have laid out my ships on the grid.\nYou now need to lay out your ships"
-    print @cpu_board.render
+    p "======== Computer's Board ========"
+    @cpu_board.render
     place_player_carrier
   end
 
@@ -98,6 +99,7 @@ class Game
     input_array = input.split(" ")
     if input = @player_board.valid_placement?(@player_carrier, input_array)
       @player_board.place(@player_carrier, input_array)
+      p "======== Player's Board ========"
       @player_board.render(true)
       if @battleship == true
         place_player_battleship
@@ -120,6 +122,7 @@ class Game
   input_array = input.split(" ")
     if input = @player_board.valid_placement?(@player_battleship, input_array)
       @player_board.place(@player_battleship, input_array)
+      p "======== Player's Board ========"
       @player_board.render(true)
       place_player_cruiser
     else 
@@ -134,6 +137,7 @@ class Game
   input_array = input.split(" ")
     if input = @player_board.valid_placement?(@player_cruiser, input_array)
       @player_board.place(@player_cruiser, input_array)
+      p "======== Player's Board ========"
       @player_board.render(true)
       p "Enter the coordinates for the Submarine (2 spaces)"
       place_player_sub
@@ -148,6 +152,7 @@ class Game
   input_array = input.split(" ")
     if input = @player_board.valid_placement?(@player_submarine, input_array)
       @player_board.place(@player_submarine, input_array)
+      p "======== Player's Board ========"
       @player_board.render(true)
       turn = Turn.new(@cpu_board, @player_board)
       turn.start_turn
