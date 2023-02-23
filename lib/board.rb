@@ -1,14 +1,18 @@
 class Board
   attr_reader :cells,
               :coordinate_array, 
-              :ship
+              :ship,
+              :row,
+              :column
 
-  def initialize
+  def initialize(row = "D", column = 4)
     @cells = {}
     @ship = []
     @coordinate_array = []
-    ("A".."D").each do |letter|
-      (1..4).each do |number|
+    @row = row
+    @column = column
+    ("A"..@row).each do |letter|
+      (1..@column).each do |number|
         coordinate = letter + number.to_s
         @coordinate_array << coordinate
         @cells[coordinate] = Cell.new(coordinate)
@@ -52,9 +56,9 @@ class Board
   
   def render(variable = false)
     heading = "  1 2 3 4 \n"
-    ("A".."D").each do |letter|
+    ("A"..@row).each do |letter|
       heading += "#{letter} "
-      (1..4).each do |number|
+      (1..@column).each do |number|
         coordinate = letter + number.to_s
         cell = @cells[coordinate]
         heading += cell.render(variable)
@@ -102,5 +106,4 @@ class Board
   def coordinate_shuffle
     @coordinate_array.shuffle!
   end
-  
 end

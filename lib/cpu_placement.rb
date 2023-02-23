@@ -14,8 +14,8 @@ class CpuPlacement
 
   def cpu_placement
     coordinate_array = []
-      ("A".."D").each do |letter|
-        (1..4).each do |number|
+      ("A"..@board.row).each do |letter|
+        (1..@board.column).each do |number|
           coordinate = letter + number.to_s
           coordinate_array << coordinate
         end
