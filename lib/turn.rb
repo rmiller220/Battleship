@@ -1,3 +1,4 @@
+
 require './lib/game'
 class Turn 
   attr_reader :cpu_board, :player_board, :cpu_sunk_ships, :player_sunk_ships
@@ -50,8 +51,8 @@ class Turn
 
   def cpu_shot
     coordinate_array = []
-    ("A"..@cpu_board.row).each do |letter|
-      (1..@cpu_board.column).each do |number|
+    ("A".."D").each do |letter|
+      (1..4).each do |number|
         coordinate = letter + number.to_s
         coordinate_array << coordinate
       end
@@ -69,7 +70,6 @@ class Turn
     end
     start_turn
   end
-
   def end_game_cpu
     boolean_array = []
     @player_board.ship.each { |ship| boolean_array << ship.sunk? }
@@ -85,7 +85,6 @@ class Turn
       player_shot
     end
   end
-
   def end_game_player
     boolean_array = []
     @cpu_board.ship.each { |ship| boolean_array << ship.sunk? }
