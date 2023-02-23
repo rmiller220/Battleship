@@ -10,12 +10,11 @@ RSpec.describe do
       expect(turn).to be_a(Turn)
     end
   end
+
     it 'starts a game and a turn' do
       game = Game.new
       player_board = Board.new
       cpu_board = Board.new
       turn = Turn.new(cpu_board, player_board)
-      #game.start
     end
-
 end

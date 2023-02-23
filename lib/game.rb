@@ -6,14 +6,10 @@ class Game
               :player_board
   
   def initialize
-    @cpu_board = Board.new
-    @player_board = Board.new
     @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
     @cpu_cruiser = Ship.new("Cruiser", 3)
     @cpu_submarine = Ship.new("Submarine", 2)
-    @cpu_placement_cruiser = CpuPlacement.new(@cpu_cruiser, @cpu_board)
-    @cpu_placement_submarine = CpuPlacement.new(@cpu_submarine, @cpu_board)
   end
 
   def start
@@ -32,6 +28,14 @@ class Game
   end
   
   def start_game
+    p "Enter desired rows (8-10 recommended)"
+    rows = (gets.to_i + 65).chr
+    p "Enter desired columns (8-10 recommended)"
+    columns = gets.to_i
+    @cpu_board = Board.new(rows, columns)
+    @player_board = Board.new(rows, columns)
+    @cpu_placement_cruiser = CpuPlacement.new(@cpu_cruiser, @cpu_board)
+    @cpu_placement_submarine = CpuPlacement.new(@cpu_submarine, @cpu_board)
     @cpu_placement_cruiser.cpu_placement
     @cpu_placement_submarine.cpu_placement
     puts "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long."
