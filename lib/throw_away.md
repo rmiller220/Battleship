@@ -19,3 +19,11 @@
     # end
     # board.valid_placement?(@ship, @coordinates)
     # board.place(@ship, @coordinates)
+
+# Future Refactors!
+   * Refactor consecutive check to be slimmer
+   * Refactor cpu_placement to render 4 and 5 length ships faster
+   * Refactor intro menu to only need one "N" for exit
+   * Refactor board render heading
+   * Refactor dialogue into dialogue module
+   * Refactor Game to have game_ship_generator type of method
