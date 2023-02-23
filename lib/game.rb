@@ -100,7 +100,6 @@ class Game
       @player_board.place(@player_carrier, input_array)
       @player_board.render(true)
       if @battleship == true
-        @cpu_placement_battleship.cpu_placement
         place_player_battleship
       else
         place_player_cruiser
